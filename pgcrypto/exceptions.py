@@ -1,0 +1,2 @@
+class BadChecksumError (Exception):
+    pass

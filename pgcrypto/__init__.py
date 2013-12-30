@@ -31,6 +31,8 @@ import datetime
 import decimal
 import struct
 
+from .exceptions import BadChecksumError
+
 CRC24_INIT = 0xB704CE
 CRC24_POLY = 0x1864CFB
 
@@ -64,9 +66,6 @@ def armor(data):
         'body': body.decode('ascii'),
         'crc': crc.decode('ascii'),
     }
-
-class BadChecksumError (Exception):
-    pass
 
 def dearmor(text, verify=True):
     """
