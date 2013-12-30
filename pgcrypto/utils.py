@@ -25,7 +25,7 @@ def crc24(data):
 def armor(data):
     """
     Returns a string in ASCII Armor format, for the given binary data. The
-    output of this is compatiple with pgcrypto's armor/dearmor functions.
+    output of this is compatible with pgcrypto's armor/dearmor functions.
     """
     template = '-----BEGIN PGP MESSAGE-----\n%(headers)s\n\n%(body)s\n=%(crc)s\n-----END PGP MESSAGE-----'
     headers = ['Version: django-pgcrypto %s' % __version__]

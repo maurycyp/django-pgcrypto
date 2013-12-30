@@ -125,8 +125,8 @@ class EncryptedDateField(BaseEncryptedField):
         return super(EncryptedDateField, self).formfield(**defaults)
 
     def to_python(self, value):
-        unecrypted_value = super(EncryptedDateField, self).to_python(value)
-        return self._parse_value(unecrypted_value)
+        unencrypted_value = super(EncryptedDateField, self).to_python(value)
+        return self._parse_value(unencrypted_value)
 
     def value_to_string(self, obj):
         val = self._get_val_from_obj(obj)
