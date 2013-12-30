@@ -12,7 +12,7 @@ try:
 except:
     has_django = False
 
-from . import aes_pad_key, unpad, dearmor, armor, pad
+from .utils import aes_pad_key, unpad, dearmor, armor, pad
 
 if has_django:
     class BaseEncryptedField (models.Field):
