@@ -15,7 +15,7 @@ except:
 from .utils import aes_pad_key, unpad, dearmor, armor, pad
 
 if has_django:
-    class BaseEncryptedField (models.Field):
+    class BaseEncryptedField(models.Field):
 
         def __init__(self, *args, **kwargs):
             # Just in case pgcrypto and/or pycrypto support more than AES/Blowfish.
@@ -74,7 +74,7 @@ if has_django:
                 return armor(self.get_cipher().encrypt(pad(unicode(value).encode(self.charset), self.cipher_class.block_size)))
             return value or ''
 
-    class EncryptedTextField (BaseEncryptedField):
+    class EncryptedTextField(BaseEncryptedField):
         __metaclass__ = models.SubfieldBase
 
         def formfield(self, **kwargs):
@@ -82,7 +82,7 @@ if has_django:
             defaults.update(kwargs)
             return super(EncryptedTextField, self).formfield(**defaults)
 
-    class EncryptedCharField (BaseEncryptedField):
+    class EncryptedCharField(BaseEncryptedField):
         __metaclass__ = models.SubfieldBase
         description = _('String (up to %(max_length)s)')
 
@@ -98,7 +98,7 @@ if has_django:
             defaults.update(kwargs)
             return super(EncryptedCharField, self).formfield(**defaults)
 
-    class EncryptedDecimalField (BaseEncryptedField):
+    class EncryptedDecimalField(BaseEncryptedField):
         __metaclass__ = models.SubfieldBase
         description = _('Decimal number')
 
@@ -113,7 +113,7 @@ if has_django:
             return value
 
 
-    class EncryptedDateField (BaseEncryptedField):
+    class EncryptedDateField(BaseEncryptedField):
         __metaclass__ = models.SubfieldBase
         description = _('Date (without time)')
 
@@ -151,7 +151,7 @@ if has_django:
         def _get_auto_now_value(self):
             return datetime.date.today()
 
-    class EncryptedDateTimeField (EncryptedDateField):
+    class EncryptedDateTimeField(EncryptedDateField):
         __metaclass__ = models.SubfieldBase
         description = _('Date (with time)')
 
@@ -166,7 +166,7 @@ if has_django:
         def _get_auto_now_value(self):
             return timezone.now()
 
-    class EncryptedEmailField (BaseEncryptedField):
+    class EncryptedEmailField(BaseEncryptedField):
         __metaclass__ = models.SubfieldBase
         default_validators = [validators.validate_email]
         description = _('Email address')

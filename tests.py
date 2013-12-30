@@ -4,7 +4,7 @@ from Crypto.Cipher import Blowfish, AES
 from pgcrypto import pad, unpad, armor, dearmor, aes_pad_key
 import unittest
 
-class CryptoTests (unittest.TestCase):
+class CryptoTests(unittest.TestCase):
 
     def setUp(self):
         # This is the expected Blowfish-encrypted value, according to the following pgcrypto call:
