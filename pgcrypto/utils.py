@@ -23,10 +23,10 @@ def crc24(data):
     return crc & 0xFFFFFF
 
 def armor(data):
-    """
+    '''
     Returns a string in ASCII Armor format, for the given binary data. The
     output of this is compatible with pgcrypto's armor/dearmor functions.
-    """
+    '''
     template = '-----BEGIN PGP MESSAGE-----\n%(headers)s\n\n%(body)s\n=%(crc)s\n-----END PGP MESSAGE-----'
     headers = ['Version: django-pgcrypto %s' % __version__]
     body = base64.b64encode(data)
@@ -39,12 +39,12 @@ def armor(data):
     }
 
 def dearmor(text, verify=True):
-    """
+    '''
     Given a string in ASCII Armor format, returns the decoded binary data.
     If verify=True (the default), the CRC is decoded and checked against that
     of the decoded data, otherwise it is ignored. If the checksum does not
     match, a BadChecksumError exception is raised.
-    """
+    '''
     lines = text.strip().split('\n')
     data_lines = []
     check_data = None
@@ -82,12 +82,12 @@ def dearmor(text, verify=True):
     return data
 
 def unpad(text, block_size):
-    """
+    '''
     Takes the last character of the text, and if it is less than the block_size,
     assumes the text is padded, and removes any trailing zeros or bytes with the
     value of the pad character. See http://www.di-mgt.com.au/cryptopad.html for
     more information (methods 1, 3, and 4).
-    """
+    '''
     end = len(text)
     if end == 0:
         return text
@@ -100,20 +100,20 @@ def unpad(text, block_size):
     return text[:end]
 
 def pad(text, block_size, zero=False):
-    """
+    '''
     Given a text string and a block size, pads the text with bytes of the same value
     as the number of padding bytes. This is the recommended method, and the one used
     by pgcrypto. See http://www.di-mgt.com.au/cryptopad.html for more information.
-    """
+    '''
     num = block_size - (len(text) % block_size)
     ch = '\0' if zero else chr(num)
     return text + (ch * num)
 
 def aes_pad_key(key):
-    """
+    '''
     AES keys must be either 16, 24, or 32 bytes long. If a key is provided that is not
     one of these lengths, pad it with zeroes (this is what pgcrypto does).
-    """
+    '''
     if len(key) in (16, 24, 32):
         return key
     if len(key) < 16:
