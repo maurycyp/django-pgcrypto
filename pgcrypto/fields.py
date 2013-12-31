@@ -71,6 +71,7 @@ class BaseEncryptedField(models.Field):
 
 class EncryptedTextField(BaseEncryptedField):
     __metaclass__ = models.SubfieldBase
+    description = _('Text')
 
     def formfield(self, **kwargs):
         defaults = {'widget': forms.Textarea}
